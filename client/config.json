@@ -1,5 +1,5 @@
 {
-  "serverUrl": "https://antigravity-remote-server.onrender.com",
-  "appName": "Antigravity Remote Support",
+  "serverUrl": "http://localhost:8080",
+  "appName": "HawkRDP",
   "fallbackLocalUrl": "http://localhost:8080"
 }

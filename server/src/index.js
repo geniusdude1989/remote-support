@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <title>Antigravity Remote Support Server</title>
+      <title>HawkRDP Server</title>
       <style>
         body {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -81,9 +81,9 @@ app.get('/', (req, res) => {
       <div class="card">
         <div class="badge">
           <div class="dot"></div>
-          <span>Cloud Signaling & Auth Server Online</span>
+          <span>HawkRDP Signaling & Auth Server Online</span>
         </div>
-        <h1>Antigravity Remote Support</h1>
+        <h1>🦅 HawkRDP Server</h1>
         <p>The secure cloud signaling, WebRTC rendezvous, and account authentication service is operating normally.</p>
         <div class="grid">
           <div>

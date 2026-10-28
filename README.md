@@ -1,4 +1,4 @@
-# Antigravity Remote Support ⚡
+# HawkRDP 🦅
 
 A high-performance, secure, AnyDesk-style remote support and desktop control application that works both **locally (LAN without internet)** and over the **cloud (WAN with NAT traversal)**.
 

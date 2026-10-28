@@ -67,7 +67,7 @@ function createMainWindow() {
     minHeight: 600,
     frame: true,
     titleBarStyle: 'default',
-    title: 'Antigravity Remote Support',
+    title: 'HawkRDP Remote Support',
     backgroundColor: '#0f172a',
     webPreferences: {
       preload: path.join(__dirname, '..', 'preload', 'preload.js'),

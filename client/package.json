@@ -1,22 +1,22 @@
 {
-  "name": "antigravity-remote-desk",
+  "name": "hawkrdp",
   "version": "1.0.0",
-  "description": "Secure AnyDesk-like Remote Desktop and Support Application",
+  "description": "HawkRDP - Fast, Secure AnyDesk-like Remote Desktop Support",
   "main": "main/main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --win nsis"
   },
-  "author": "Antigravity",
+  "author": "HawkRDP",
   "license": "MIT",
   "devDependencies": {
     "electron": "^33.2.1",
     "electron-builder": "^25.1.8"
   },
   "build": {
-    "appId": "com.antigravity.remotedesk",
-    "productName": "Antigravity Remote Support",
+    "appId": "com.hawkrdp.app",
+    "productName": "HawkRDP",
     "directories": {
       "output": "dist"
     },

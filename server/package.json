@@ -1,7 +1,7 @@
 {
-  "name": "antigravity-remote-server",
+  "name": "hawkrdp-server",
   "version": "1.0.0",
-  "description": "Secure Cloud Signaling and Authentication Server for Remote Support",
+  "description": "HawkRDP Secure Cloud Signaling and Authentication Server",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js"
