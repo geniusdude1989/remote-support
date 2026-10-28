@@ -1,0 +1,5 @@
+{
+  "serverUrl": "https://antigravity-remote-server.onrender.com",
+  "appName": "Antigravity Remote Support",
+  "fallbackLocalUrl": "http://localhost:8080"
+}

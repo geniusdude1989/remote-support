@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+client/dist/
+
+# Local databases & logs
+server/data/
+*.log
+
+# OS generated
+.DS_Store
+Thumbs.db

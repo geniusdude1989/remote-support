@@ -1,0 +1,56 @@
+{
+  "name": "antigravity-remote-desk",
+  "version": "1.0.0",
+  "description": "Secure AnyDesk-like Remote Desktop and Support Application",
+  "main": "main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win nsis"
+  },
+  "author": "Antigravity",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.antigravity.remotedesk",
+    "productName": "Antigravity Remote Support",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main/**/*",
+      "preload/**/*",
+      "renderer/**/*",
+      "native/**/*",
+      "assets/**/*",
+      "config.json",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "native/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "native/input_injector.exe",
+        "to": "native/input_injector.exe"
+      }
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

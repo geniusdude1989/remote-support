@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Remote Support</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Bar -->
+  <header class="top-header">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <span>ANTIGRAVITY DESK</span>
+    </div>
+
+    <div class="status-badges">
+      <div class="badge" id="badge-cloud" title="Cloud Signaling Connection">
+        <div class="badge-dot" id="cloud-dot"></div>
+        <span id="cloud-status-text">Cloud Connecting...</span>
+      </div>
+      <div class="badge" id="badge-lan" title="Local Area Network Discovery">
+        <div class="badge-dot lan"></div>
+        <span id="lan-count-text">LAN: 0 nearby</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main App Shell -->
+  <div class="app-container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="nav-group">
+        <div class="nav-item active" data-tab="desk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Remote Desk</span>
+        </div>
+        <div class="nav-item" data-tab="lan">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="16" y="2" width="6" height="6" rx="1"/><rect x="9" y="16" width="6" height="6" rx="1"/><path d="M5 8v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"/><line x1="12" y1="13" x2="12" y2="16"/></svg>
+          <span>Discovered (LAN)</span>
+        </div>
+        <div class="nav-item" data-tab="address-book">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Address Book</span>
+        </div>
+        <div class="nav-item" data-tab="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Settings</span>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge" id="btn-user-profile">
+          <div class="user-avatar" id="avatar-initials">?</div>
+          <div class="user-info">
+            <span class="user-name" id="profile-name">Guest User</span>
+            <span class="user-email" id="profile-email">Click to Sign In</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Panels -->
+    <main class="main-content">
+      <!-- Active Inbound Session Bar -->
+      <div class="active-session-banner" id="active-host-banner">
+        <div>
+          <strong style="color: #6ee7b7;">● Active Incoming Session:</strong>
+          <span id="active-session-partner" style="margin-left: 8px;">Connected to remote technician</span>
+        </div>
+        <button class="btn-secondary" id="btn-host-disconnect" style="background-color: var(--accent-red); border: none;">
+          Disconnect Session
+        </button>
+      </div>
+
+      <!-- TAB 1: DESK (Default) -->
+      <section class="tab-pane active" id="tab-desk">
+        <div class="desk-grid">
+          <!-- Card: This Desk -->
+          <div class="desk-card">
+            <div class="card-title">
+              <span>This Desk (Share Screen)</span>
+              <span class="card-title-tag">READY</span>
+            </div>
+
+            <div class="device-id-container">
+              <div class="device-id-label">YOUR 9-DIGIT ADDRESS</div>
+              <div class="device-id-number" id="my-device-id" title="Click to copy">--- --- ---</div>
+              <div class="device-id-actions">
+                <button class="btn-secondary" id="btn-copy-id">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy ID
+                </button>
+                <button class="btn-secondary" id="btn-regen-pin">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                  New PIN
+                </button>
+              </div>
+            </div>
+
+            <div class="security-box">
+              <div class="security-row">
+                <span>One-Time Session PIN:</span>
+                <span class="security-val" id="session-pin">9482</span>
+              </div>
+              <div class="security-row">
+                <span>Unattended Access:</span>
+                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                  <input type="checkbox" id="chk-unattended">
+                  <span id="unattended-label" style="font-size: 12px; color: var(--text-muted);">Disabled</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
+              Give your ID and PIN to your trusted support partner or technician to allow them to view and control your desk.
+            </div>
+          </div>
+
+          <!-- Card: Remote Desk -->
+          <div class="desk-card">
+            <div class="card-title">
+              <span>Remote Desk (Control PC)</span>
+            </div>
+
+            <div class="remote-connect-box">
+              <div class="input-group">
+                <input type="text" class="input-text" id="target-desk-id" placeholder="Enter 9-Digit ID or LAN IP" maxlength="30">
+                <button class="btn-primary" id="btn-connect">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Connect
+                </button>
+              </div>
+              <div style="font-size: 12px; color: var(--text-muted);">
+                Supports Cloud Device IDs (e.g. <code>482 190 735</code>) and Direct LAN IPs (e.g. <code>192.168.1.45</code>).
+              </div>
+            </div>
+
+            <div class="section-header">Recent Connections</div>
+            <div class="device-list" id="recent-connections-list">
+              <div style="font-size: 12px; color: var(--text-muted); padding: 8px;">No recent sessions yet.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: LAN DISCOVERY -->
+      <section class="tab-pane" id="tab-lan">
+        <h2 style="font-size: 18px; margin-bottom: 12px;">Discovered Computers on Local Network</h2>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">
+          These devices were detected via zero-config UDP local broadcast on your Wi-Fi/LAN. Connect directly with peer-to-peer latency without internet.
+        </p>
+        <div class="device-list" id="lan-devices-list">
+          <div style="font-size: 13px; color: var(--text-muted); padding: 12px;">Scanning local network for other Antigravity desks...</div>
+        </div>
+      </section>
+
+      <!-- TAB 3: ADDRESS BOOK / CLOUD DEVICES -->
+      <section class="tab-pane" id="tab-address-book">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <h2 style="font-size: 18px;">My Cloud Address Book</h2>
+            <p style="font-size: 13px; color: var(--text-muted);">Synced devices linked to your account.</p>
+          </div>
+          <button class="btn-secondary" id="btn-refresh-addressbook">Refresh</button>
+        </div>
+        <div class="device-list" id="address-book-list">
+          <div style="font-size: 13px; color: var(--text-muted); padding: 12px;">Sign in to sync and access your address book.</div>
+        </div>
+      </section>
+
+      <!-- TAB 4: SETTINGS -->
+      <section class="tab-pane" id="tab-settings">
+        <div class="form-card">
+          <h2 style="font-size: 18px; margin-bottom: 16px;">Application Settings</h2>
+          <div class="form-group">
+            <label class="form-label">Cloud Signaling & Auth Server URL</label>
+            <input type="text" class="input-text" id="setting-server-url" value="http://localhost:8080">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Streaming Quality Preset</label>
+            <select class="input-text" id="setting-stream-preset">
+              <option value="balanced" selected>Balanced (60 FPS, Adaptive Bitrate)</option>
+              <option value="smooth">High Framerate (60-120 FPS, Low Latency)</option>
+              <option value="best">Highest Clarity (1080p+, High Quality)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Unattended Master Password</label>
+            <input type="password" class="input-text" id="setting-unattended-pwd" placeholder="Set password for remote access without prompt">
+          </div>
+          <button class="btn-primary" id="btn-save-settings" style="width: 100%; justify-content: center;">Save Settings</button>
+        </div>
+      </section>
+
+      <!-- TAB 5: AUTHENTICATION (LOGIN / REGISTER) -->
+      <section class="tab-pane" id="tab-auth">
+        <div class="form-card" id="auth-form-card">
+          <div style="display: flex; gap: 8px; margin-bottom: 18px;">
+            <button class="btn-secondary" id="auth-toggle-login" style="flex: 1; font-weight: bold; background-color: var(--accent-red); color: white;">Sign In</button>
+            <button class="btn-secondary" id="auth-toggle-register" style="flex: 1;">Create Account</button>
+          </div>
+
+          <div id="auth-error-msg" style="display: none; padding: 10px; background-color: rgba(239, 68, 68, 0.2); border: 1px solid var(--accent-red); border-radius: 6px; color: #fca5a5; font-size: 12px; margin-bottom: 14px;"></div>
+
+          <div class="form-group" id="group-name" style="display: none;">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="input-text" id="auth-name" placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="input-text" id="auth-email" placeholder="user@company.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="input-text" id="auth-password" placeholder="••••••••••••">
+          </div>
+          <button class="btn-primary" id="btn-auth-submit" style="width: 100%; justify-content: center; margin-top: 8px;">Sign In</button>
+        </div>
+
+        <div class="form-card" id="auth-logged-in-card" style="display: none; text-align: center;">
+          <div class="user-avatar" id="logged-avatar" style="width: 64px; height: 64px; font-size: 24px; margin: 0 auto 14px;">U</div>
+          <h2 id="logged-name" style="font-size: 18px;">User Name</h2>
+          <p id="logged-email" style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">email@domain.com</p>
+          <button class="btn-secondary" id="btn-link-device" style="width: 100%; margin-bottom: 10px; justify-content: center;">Link This Computer to Account</button>
+          <button class="btn-secondary" id="btn-logout" style="width: 100%; justify-content: center; color: #f87171;">Sign Out</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- INCOMING CALL MODAL DIALOG (ANYDESK STYLE) -->
+  <div class="modal-overlay" id="incoming-modal">
+    <div class="incoming-card">
+      <div class="incoming-header">
+        <div class="incoming-title">Incoming Remote Session</div>
+        <div class="incoming-caller" id="incoming-caller-id">--- --- ---</div>
+        <div class="incoming-caller-name" id="incoming-caller-name">Remote Technician</div>
+      </div>
+
+      <div class="permissions-box">
+        <div style="font-size: 12px; font-weight: bold; margin-bottom: 4px; color: var(--text-muted);">SESSION PERMISSIONS</div>
+        <label class="permission-toggle">
+          <input type="checkbox" id="perm-control" checked>
+          <span>Allow Keyboard & Mouse Control</span>
+        </label>
+        <label class="permission-toggle">
+          <input type="checkbox" id="perm-clipboard" checked>
+          <span>Allow Clipboard Synchronization</span>
+        </label>
+      </div>
+
+      <div class="incoming-actions">
+        <button class="btn-accept" id="btn-accept-call">ACCEPT</button>
+        <button class="btn-reject" id="btn-reject-call">DISMISS</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connect Password Dialog Modal -->
+  <div class="modal-overlay" id="password-modal">
+    <div class="incoming-card" style="border-color: var(--accent-blue);">
+      <div class="incoming-header">
+        <div class="incoming-title">Authentication Required</div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">
+          Enter the Session PIN or Unattended Password for remote desk:
+        </div>
+        <div class="incoming-caller" id="pwd-dialog-target-id" style="color: #60a5fa; font-size: 20px;">--- --- ---</div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" class="input-text" id="pwd-input" placeholder="Enter PIN or Password" style="font-size: 18px; text-align: center; letter-spacing: 2px;">
+      </div>
+
+      <div class="incoming-actions">
+        <button class="btn-accept" id="btn-pwd-submit" style="background-color: var(--accent-blue);">CONNECT</button>
+        <button class="btn-reject" id="btn-pwd-cancel" style="background-color: #4b5563;">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

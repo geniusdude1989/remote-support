@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: antigravity-remote-server
+    runtime: node
+    plan: free
+    region: frankfurt # or oregon, ohio, singapore
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
